@@ -1,5 +1,5 @@
 ---
-title: Mugs
+title: Food & Drink
 layout: category
 order: 1
 seo:
