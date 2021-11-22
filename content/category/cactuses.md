@@ -1,5 +1,5 @@
 ---
-title: Cactuses
+title: Tools
 layout: category
 order: 2
 seo:
