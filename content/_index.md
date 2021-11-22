@@ -5,7 +5,7 @@ white_header: true
 sections:
   - type: hero_section
     section_id: hero_section
-    background_image: images/header.jpg
+    background_image: images/istockphoto-1213691432-612x612.jpg
     background_image_opacity: 65
     content: |
       # Tenthill Gear
