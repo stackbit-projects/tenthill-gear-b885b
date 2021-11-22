@@ -1,0 +1,13 @@
+{{ $site := .Site }}
+{{ $page := .page }}
+<ul class="store__nav-items">
+    {{ $category_pages := ((.Site.GetPage "section" "/category").Pages).ByParam "order" }}
+    {{ range $item := $category_pages }}
+        {{ $isCurrentPage := cond (eq $page.URL $item.URL) true false }}
+        <li class="store__nav-item">
+            <a href="{{ $item.URL }}" class="store__nav-item-link{{ if $isCurrentPage }} store__nav-item-link--active{{ end }}">
+                {{ $item.Title }}
+            </a>
+        </li>
+    {{ end }}
+</ul>

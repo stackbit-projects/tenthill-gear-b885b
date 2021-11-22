@@ -1,0 +1,22 @@
+{{ $product_page := .product_page }}
+
+<li class="product-grid__item">
+    <figure class="product-grid__item-figure">
+        <a class="product-grid__item-link" href="{{ $product_page.URL }}">
+            {{ $include_dict := dict "image" $product_page.Params.default_thumbnail_image "alt" $product_page.Title "cssClass" "product-grid__item-image" }}
+            {{ partial "picture.html" $include_dict }}
+        </a>
+        <figcaption>
+            {{ $include_dict = dict "product_page" $product_page "component" "product-grid" }}
+            {{ partial "small_buy_button.html" $include_dict }}
+        </figcaption>
+    </figure>
+    <div class="product-grid__definition">
+        <a href="{{ $product_page.URL }}"><h3 class="product-grid__title">{{ $product_page.Title }}</h3></a>
+        {{ if $product_page.Params.category }}
+            {{ $category_page := $.Site.GetPage "page" ( $product_page.Params.category | strings.TrimPrefix "content/" ) }}
+            <span class="product-grid__category"> {{ $category_page.Title }} </span>
+        {{ end }}
+        <span class="product-grid__price"> ${{ $product_page.Params.price }} </span>
+    </div>
+</li>

@@ -1,0 +1,10 @@
+{{ $site := .Site }}
+{{ $products := .products }}
+{{ $listCssClass := .cssClass }}
+<ul class="product-grid {{ if $listCssClass }}{{ $listCssClass }}{{ end }}">
+    {{ range $product := $products }}
+        {{ $product_page := $.Site.GetPage "page" ( $product | strings.TrimPrefix "content/" ) }}
+            {{ $include_dict := dict "product_page" $product_page "Site" $site }}
+            {{ partial "product_grid_item.html" $include_dict }}
+    {{ end }}
+</ul>

@@ -1,0 +1,23 @@
+{{ $section := .section }}
+<section class="content__row content__row--full-width promo__section"  data-id="{{ $section.section_id }}">
+    <div class="promo">
+        {{ $include_dict := dict "image" $section.image "alt" $section.title }}
+        {{ partial "picture.html" $include_dict }}
+
+        <div class="promo__message-container" {{ if $section.background_image }}style="background-image: url('{{ $section.background_image | relURL }}')"{{ end }}>
+            <h2 class="promo__title">{{ $section.title }}</h2>
+            <p class="promo__subtitle">{{ $section.subtitle }}</p>
+            {{ if $section.cta }}
+                {{ $cta_style := $section.cta.style | default "primary" }}
+                <a class="link promo__link{{ if eq $cta_style "primary" }} link--light-filled{{ end }}{{ if eq $cta_style "secondary" }} link--light{{ end }}{{ if eq $cta_style "link" }} link--light-borderless{{ end }}" href="{{ $section.cta.url }}">
+                    {{ $section.cta.title }}
+                    {{ if $section.cta.arrow }}
+                    <svg width="26" height="14" viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.682 6.079h-22.682v1.712h22.814l-4.574 4.528 1.194 1.182 6.566-6.5-6.566-6.5-1.194 1.182 4.442 4.397z"></path>
+                    </svg>
+                    {{ end }}
+                </a>
+            {{ end }}
+        </div>
+    </div>
+</section>

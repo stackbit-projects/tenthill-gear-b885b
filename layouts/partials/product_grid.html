@@ -1,0 +1,20 @@
+{{ $site := .Site }}
+{{ $product_pages := .product_pages }}
+{{ $listCssClass := .cssClass }}
+{{ $category_url := .category_url }}
+<ul class="product-grid {{ if $listCssClass }}{{ $listCssClass }}{{ end }}">
+    {{ range $product_page := $product_pages }}
+        {{ if not $category_url }}
+            {{ $include_dict := dict "product_page" $product_page "Site" $site }}
+            {{ partial "product_grid_item.html" $include_dict }}
+        {{ else }}
+            {{ if $product_page.Params.category }}
+                {{ $category_page := $.Site.GetPage "page" ( $product_page.Params.category | strings.TrimPrefix "content/" ) }}
+                {{ if eq $category_url $category_page.URL }}
+                    {{ $include_dict := dict "product_page" $product_page "Site" $site }}
+                    {{ partial "product_grid_item.html" $include_dict }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+</ul>

@@ -1,0 +1,16 @@
+{{ define "content" }}
+{{ $store_page := .Site.GetPage "page" "/store" }}
+<main class="content{{ if $store_page.Params.page_css_class }} {{ $store_page.Params.page_css_class }}{{ end }}">
+    {{ range $section := $store_page.Params.sections }}
+        {{ if eq $section.type "store_section" }}
+            {{ $include_dict := dict "section" $section "page" $ "category_url" $.URL "Site" $.Site }}
+            {{ $component := print $section.type ".html" }}
+            {{ partial $component $include_dict }}
+        {{ else }}
+            {{ $include_dict := dict "section" $section "page" $ "Site" $.Site }}
+            {{ $component := print $section.type ".html" }}
+            {{ partial $component $include_dict }}
+        {{ end }}
+    {{ end }}
+</main>
+{{ end }}

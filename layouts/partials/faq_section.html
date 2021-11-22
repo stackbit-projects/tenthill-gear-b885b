@@ -1,0 +1,14 @@
+{{ $section := .section }}
+
+<section class="content__row faq__section" data-id="{{ $section.section_id }}">
+{{ range $question := $section.questions }}
+  <section class="content__row faq__section-content">
+    <div class="faq__section-content-container">
+      <h2 class="faq__question">{{ $question.question }}</h2>
+      <div class="faq__answer">
+        {{ partial "markdownify-block" $question.answer }}
+      </div>
+    </div>
+  </section>
+{{ end }}
+</section>

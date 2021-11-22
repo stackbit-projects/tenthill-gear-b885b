@@ -1,0 +1,12 @@
+{{ $section := .section }}
+
+<section class="content__row" data-id="{{ $section.section_id }}">
+    {{ $categories := $section.featured_categories }}
+    {{ range $category := $categories }}
+        {{ $category_page := $.Site.GetPage "page" ( $category | strings.TrimPrefix "content/" ) }}
+        <h2 class="content__row-title">{{ $category_page.Title }}</h2>
+        {{ $product_pages := (($.Site.GetPage "section" "/products").Pages).ByParam "order" }}
+        {{ $include_dict := dict "product_pages" $product_pages "category_url" $category_page.URL "Site" $.Site }}
+        {{ partial "product_grid.html" $include_dict }}
+    {{ end }}
+</section>

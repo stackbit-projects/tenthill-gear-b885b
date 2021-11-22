@@ -1,0 +1,9 @@
+{{ $image := .image }}
+{{ $alt := .alt }}
+{{ $cssClass := .cssClass }}
+
+{{ if $image }}
+<picture>
+  <img src="{{ $image | relURL }}" {{ if $alt }}alt="{{ $alt }}"{{ end }}  {{ if $cssClass }}class="{{ $cssClass }}"{{ end }}>
+</picture>
+{{ end }}

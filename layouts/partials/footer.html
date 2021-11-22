@@ -1,0 +1,21 @@
+{{ $page := .page }}
+{{ $site := .Site }}
+{{ $menu := $site.Data.config.main_menu }}
+<footer class="footer">
+    <div class="footer__container">
+        <a class="footer__logo" href="{{ "/" | relURL }}">
+            {{ $include_dict := dict "image" $site.Data.config.logo_light "cssClass" "footer__logo-image" "alt" "Site logo" }}
+            {{ partial "picture.html" $include_dict }}
+        </a>
+        <ul class="footer__nav">
+            {{ range $item := $menu }}
+            <li class="footer__nav-item">
+                <a href="{{ $item.url | relURL }}" {{ if eq $item.title $page.Title }}class="footer__nav-link footer__nav-link--active" {{ else }}class="footer__nav-link"{{ end }}>
+                {{ $item.title }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+        <div class="footer__legal-notice">{{ $site.Data.config.footer_text }}</div>
+    </div>
+</footer>

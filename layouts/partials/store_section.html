@@ -1,0 +1,20 @@
+{{ $page := .page }}
+{{ $section := .section }}
+{{ $category_url := .category_url }}
+<section class="content__row" data-id="{{ $section.section_id }}">
+    <div class="content__row content__row--direction-row store__head">
+        <h1 class="store__title">All Products</h1>
+    </div>
+
+    <div class="content__row store__container">
+        <nav class="store__nav">
+            {{ $include_dict := dict "page" $page "Site" .Site }}
+            {{ partial "nav_categories.html" $include_dict }}
+        </nav>
+        <section class="store__products">
+            {{ $product_pages := ((.Site.GetPage "section" "/products").Pages).ByParam "order" }}
+            {{ $include_dict = dict "product_pages" $product_pages "category_url" $category_url "cssClass" "store__product-grid" "Site" .Site }}
+            {{ partial "product_grid.html" $include_dict }}
+        </section>
+    </div>
+</section>

@@ -1,0 +1,68 @@
+{{ define "content" }}
+    {{ $primary_bg_img_opacity_pct := .Site.Data.config.bg_image_primary_opacity | default 100 }}
+    {{ $primary_bg_img_opacity := mul $primary_bg_img_opacity_pct 0.01 }}
+    <main class="content">
+        <section class="product content__row content__row--full-width">
+            <div class="product__background-left">
+                {{ if .Site.Data.config.bg_image_primary }}
+                <div class="product__background-left-img" style="background-image: url('{{ $.Site.Data.config.bg_image_primary | relURL }}'); opacity: {{ $primary_bg_img_opacity }};"></div>
+                {{ end }}
+            </div>
+            {{ if .Site.Data.config.bg_image_secondary }}
+            <div class="product__background-right" style="background-image: url('{{ $.Site.Data.config.bg_image_secondary | relURL }}')"></div>
+            {{ end }}
+            <div class="product__header">
+                <a href="{{ "/store" | relURL }}" class="product__back-to-store-link">
+                    <svg width="20" height="10" viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.739 4.309h17.011v1.284h-17.11l3.43 3.396-0.895 0.886-4.924-4.875 4.924-4.875 0.895 0.886-3.331 3.298z"></path>
+                    </svg>
+                    see all products
+                </a>
+            </div>
+            <figure class="product__figure">
+                {{ $include_dict := dict "image" .Params.default_original_image "alt" .Title "cssClass" "product__image" }}
+                {{ partial "picture.html" $include_dict }}
+            </figure>
+            <div class="product__details">
+                <h1 class="product__title">
+                    {{ .Title }}
+                </h1>
+
+                {{ if .Params.category }}
+                    {{ $category_page := $.Site.GetPage "page" ( $.Params.category | strings.TrimPrefix "content/" ) }}
+                    <h2 class="product__category">
+                        <a href="{{ $category_page.URL }}"> {{ $category_page.Title }} </a>
+                    </h2>
+                {{ end }}
+                <div class="product__price">
+                    ${{ .Params.price }}
+                </div>
+
+                <article class="product__description">
+                    {{ .Params.description }}
+                </article>
+
+                {{ $include_dict = dict "product_page" . }}
+                {{ partial "buy_button.html" $include_dict }}
+            </div>
+        </section>
+
+        {{ if .Params.category }}
+            <section class="content__row">
+                <h2 class="content__row-title">Related</h2>
+                {{ $product_pages := where ((($.Site.GetPage "section" "/products").Pages).ByParam "order") "Params.id" "!=" $.Params.id }}
+                {{ $category_page := $.Site.GetPage "page" ( $.Params.category | strings.TrimPrefix "content/" ) }}
+                {{ $include_dict = dict "product_pages" $product_pages "category_url" $category_page.URL "cssClass" "store__product-grid" "Site" $.Site }}
+
+                {{ partial "product_grid.html" $include_dict }}
+            </section>
+        {{ end }}
+
+        <a href="{{ "/store" | relURL }}" class="content__row content__row--full-width content__row--mb-0 product__back-to-store"{{ if .Site.Data.config.bg_image_product }} style="background-image: url('{{ $.Site.Data.config.bg_image_product | relURL }}')"{{ end }}>
+            <svg width="20" height="10" viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.739 4.309h17.011v1.284h-17.11l3.43 3.396-0.895 0.886-4.924-4.875 4.924-4.875 0.895 0.886-3.331 3.298z"></path>
+            </svg>
+            see all products
+        </a>
+    </main>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ $section := .section }}
+
+<section class="content__row bulletpoints__section" data-id="{{ $section.section_id }}">
+{{ range $bulletpoint := $section.bulletpoints }}
+  <section class="content__row bulletpoint__section">
+    {{ $include_dict := dict "image" $bulletpoint.image "alt" $bulletpoint.title "cssClass" "bulletpoint__section-image" }}
+    {{ partial "picture.html" $include_dict }}
+    <div class="bulletpoint__section-content-container">
+      <h2 class="bulletpoint__section-title">{{ $bulletpoint.title }}</h2>
+      <div class="bulletpoint__section-content">
+        {{ partial "markdownify-block" $bulletpoint.description }}
+      </div>
+    </div>
+  </section>
+{{ end }}
+</section>

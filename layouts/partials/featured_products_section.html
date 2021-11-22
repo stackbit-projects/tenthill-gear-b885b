@@ -1,0 +1,15 @@
+{{ $section := .section }}
+    <section class="content__row"  data-id="{{ $section.section_id }}">
+        <h2 class="content__row-title{{ if $section.light_title }} content__row-title--light{{ end }}">
+            {{ if $section.icon }}
+            <svg width="29" height="25" viewBox="0 0 29 25" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28.152 3.419c-0.939-1.661-6.827-7.221-13.652 0.829-7.168-8.051-12.715-2.49-13.652-0.829-1.707 3.071-0.683 7.719 1.707 9.96l11.947 11.621 11.947-11.621c2.387-2.241 3.411-6.888 1.704-9.96h-0z"></path>
+            </svg>
+            {{ end }}
+            {{ $section.title }}
+        </h2>
+
+        {{ $featured_products := $section.featured_products }}
+        {{ $include_dict := dict "products" $featured_products "Site" .Site }}
+        {{ partial "featured_grid.html" $include_dict }}
+    </section>

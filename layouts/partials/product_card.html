@@ -1,0 +1,10 @@
+{{ $product_page := .product_page }}
+<li class="product__card">
+    <figure class="product__card__image">
+        {{ $include_dict := dict "image" $product_page.Params.default_thumbnail_image "alt" $product_page.Title }}
+        {{ partial "picture.html" $include_dict }}
+    </figure>
+    <h2 class="product__card__title">
+        {{ $product_page.Title }}
+    </h2>
+</li>
