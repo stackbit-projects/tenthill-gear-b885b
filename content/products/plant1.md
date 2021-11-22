@@ -7,7 +7,7 @@ description: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit velit
   lectus, vitae efficitur quam mollis eget. Integer porta at nisl eget
   tincidunt.
-default_thumbnail_image: images/plant1.jpg
+default_thumbnail_image: images/signal-2021-11-20-133809.jpeg
 default_original_image: images/plant1-lg.jpg
 featured: true
 order: 1
