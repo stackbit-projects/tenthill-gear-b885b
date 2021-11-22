@@ -5,7 +5,7 @@ white_header: true
 sections:
   - type: hero_section
     section_id: hero_section
-    background_image: images/244040.jpg
+    background_image: images/244206.webp
     background_image_opacity: 65
     content: |
       # Tenthill Gear
