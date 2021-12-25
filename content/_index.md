@@ -10,7 +10,7 @@ sections:
     content: |
       # Tenthill Gear
 
-      Quality over quantity, camping gear.
+      Quality camping gear.
     actions:
       - title: See all items
         url: /store
